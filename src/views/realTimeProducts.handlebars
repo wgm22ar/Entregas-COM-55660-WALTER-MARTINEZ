@@ -1,0 +1,17 @@
+<h1>Listado de Productos disponibles</h1>
+<div class="realTime">
+  <div class="realTimeItem">{{#each productos}}
+    <h2>{{this.title}}</h2>
+    <p>{{this.description}}</p>
+    <p>{{this.price}}</p>
+    <p>{{this.image}}</p>
+    <p>{{this.stock}}</p>
+    <p>{{this.codigo}}</p>
+    <p>{{this.id}}</p>
+  {{/each}}
+  </div>
+</div>
+{{> form}}
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="/js/socket.js"></script>
