@@ -61,21 +61,41 @@ app.get("/realTimeProducts", async (req, res) => {
 socketServer.on("connection", (socket) => {
   console.log("Nuevo cliente conectado");
 
-  socket.on("message", (data) => {
-    console.log(data);
+  socket.on("Product database update", async (data) => {
+    await producto.createNewProduct(data);
+    let updatedCart = await producto.getProducts();
+
+    socketServer.emit("real time products update", updatedCart);
   });
-  socket.emit(
-    "evento_socket_individual",
-    "este mensaje lo debe recibir el socket actual"
-  );
 
-  socket.broadcast.emit(
-    "evento_para_todos_menos_actual",
-    "Se conecto otro cliente"
-  );
+  socket.on("product deleted", async (data) => {
+    await producto.getProducts(data);
+    let id = data;
+    await producto.deleteProductById(id);
+    let newProductos = await producto.getProducts();
 
-  socketServer.emit(
-    "evento_para_todos",
-    "este evento es escuchados por todos los usuarios conectados"
-  );
+    socketServer.emit("real time products update", newProductos);
+  });
 });
+
+// socketServer.on("connection", (socket) => {
+//   console.log("Nuevo cliente conectado");
+
+//   socket.on("message", (data) => {
+//     console.log(data);
+//   });
+//   socket.emit(
+//     "evento_socket_individual",
+//     "este mensaje lo debe recibir el socket actual"
+//   );
+
+//   socket.broadcast.emit(
+//     "evento_para_todos_menos_actual",
+//     "Se conecto otro cliente"
+//   );
+
+//   socketServer.emit(
+//     "evento_para_todos",
+//     "este evento es escuchados por todos los usuarios conectados"
+//   );
+// });

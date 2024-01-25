@@ -1,17 +1,63 @@
-<h1>Listado de Productos disponibles</h1>
-<div class="realTime">
+{{!-- <div class="realTime">
   <div class="realTimeItem">{{#each productos}}
-    <h2>{{this.title}}</h2>
-    <p>{{this.description}}</p>
-    <p>{{this.price}}</p>
-    <p>{{this.image}}</p>
-    <p>{{this.stock}}</p>
-    <p>{{this.codigo}}</p>
-    <p>{{this.id}}</p>
-  {{/each}}
+      <h2>{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <p>{{this.price}}</p>
+      <p>{{this.image}}</p>
+      <p>{{this.stock}}</p>
+      <p>{{this.codigo}}</p>
+      <p>{{this.id}}</p>
+    {{/each}}
   </div>
+</div> --}}
+
+<h3>Agregar producto</h3>
+<div>
+  <form action="">
+    <span>Nombre: </span>
+    <input type="text" id="productToAddTitle" placeholder="title">
+    <br>
+    <span>Precio: </span>
+    <input type="number" id="productToAddPrice" placeholder="price">
+    <br>
+    <span>Codigo: </span>
+    <input type="text" id="productToAddCode" placeholder="code">
+    <br>
+    <span>Descripcion: </span>
+    <input type="text" id="productToAddDescription" placeholder="description">
+    <br>
+    <span>Stock: </span>
+    <input type="number" id="productToAddStock" placeholder="stock">
+    <br>
+    <span>Imagen: </span>
+    <input type="text" id="productToAddThumbnails" placeholder="thumbnails">
+    <br>
+    <br>
+    <button id="submitButton">Agregar Producto</button>
+  </form>
 </div>
-{{> form}}
+
+<h3>Eliminar Producto</h3>
+<form action="">
+  <input type="text" id="productToBeDeleteId" placeholder="Ingresar el ID del producto">
+  <br>
+  <br>
+  <button id="deleteButton">Eliminar Producto</button>
+</form>
+
+<h2>Listado de Productos disponibles</h2>
+<div id="productsContainer">
+  <div class="realTimeItem">{{#each productos}}
+      <h2>{{this.title}}</h2>
+      <p>{{this.description}}</p>
+      <p>{{this.price}}</p>
+      <p>{{this.image}}</p>
+      <p>{{this.stock}}</p>
+      <p>{{this.codigo}}</p>
+      <p>{{this.id}}</p>
+    {{/each}}
+</div>
+
 
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/socket.js"></script>

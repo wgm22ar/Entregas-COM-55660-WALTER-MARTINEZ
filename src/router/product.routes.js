@@ -28,5 +28,11 @@ ProductRoutes.put("/:id", async (req, res) => {
   let updateProduct = req.body;
   res.send(await producto.updateProducts(id, updateProduct));
 });
+ProductRoutes.get("/realtimeproducts", async (req, res) => {
+  let products = await producto.getProducts();
+  res.render("realTimeProducts", {
+    products,
+  });
+});
 
 export default ProductRoutes;
